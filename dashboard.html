@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About SymptoCare</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    
+
+    :root{
+      --primary-start:#1565c0;
+      --primary-end:#00bcd4;
+      --accent1:#190eeb;
+      --accent2:#6d0ce4;
+      --card-bg: rgba(255,255,255,0.85);
+      --glass: rgba(255,255,255,0.06);
+    }
+
+    html,body{height:100%}
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', 'Segoe UI', sans-serif;
+      color: #04293a;
+      /* animated gradient background */
+      background: linear-gradient(120deg, #0d8bf2 0%, #4dd0e1 25%, #485de3 50%, #4359e8 75%);
+      background-size: 300% 300%;
+      animation: bgShift 18s ease infinite;
+      overflow-x: hidden;
+    }
+    @keyframes bgShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* top navbar */
+    .navbar {
+      background: linear-gradient(90deg, var(--primary-start), var(--primary-end));
+      box-shadow: 0 6px 24px rgba(9,30,66,0.12);
+      border-bottom-left-radius: 0.6rem;
+      border-bottom-right-radius: 0.6rem;
+      z-index: 999;
+    }
+    .navbar-brand { letter-spacing: 0.4px; font-weight:700; }
+
+    /* hero */
+    .hero {
+      padding: 72px 20px;
+      margin-top: 8px;
+      text-align: center;
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), transparent);
+      border-radius: 1rem;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 10px 30px rgba(2,6,23,0.08);
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero:before{
+      content:"";
+      position:absolute;
+      right:-10%;
+      top:-20%;
+      width:480px;height:480px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.08), transparent 30%),
+                  linear-gradient(135deg, rgba(255,255,255,0.03), transparent 40%);
+      transform: rotate(25deg);
+      pointer-events:none;
+    }
+    .hero h1 { font-weight:800; letter-spacing: -0.6px; color: #fff; text-shadow: 0 6px 30px rgba(0,0,0,0.25); }
+    .hero p.lead { color: rgba(255,255,255,0.95); font-weight:500 }
+
+    /* cards & sections */
+    .section { padding: 48px 16px; }
+    .card-tilt { transition: transform .35s cubic-bezier(.2,.9,.2,1), box-shadow .35s; border-radius: 1rem; }
+    .card-tilt:hover { transform: translateY(-12px) rotate(-0.6deg); box-shadow: 0 18px 48px rgba(2,6,23,.12); }
+
+    /* counters */
+    .stat {
+      background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.95));
+      padding: 18px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(2,6,23,0.06);
+    }
+    .stat h3 { font-size: 2rem; margin:0; color: var(--primary-start); font-weight:800; }
+    .stat p { margin: 0; color: #475569; font-weight:600; }
+
+    /* carousel */
+    .carousel-item img { height: 340px; object-fit: cover; border-radius: .75rem; }
+
+    /* particles (subtle) */
+    .particles { position: fixed; inset:0; pointer-events:none; z-index:0; mix-blend-mode:overlay; opacity:0.18; }
+
+    /* floating image */
+    .floating {
+      transform: translateY(0);
+      animation: floatSlow 6s ease-in-out infinite;
+    }
+    @keyframes floatSlow {
+      0%{ transform: translateY(0) }
+      50%{ transform: translateY(-10px) }
+      100%{ transform: translateY(0) }
+    }
+
+    /* CTA buttons */
+    .btn-cta {
+      background: linear-gradient(90deg, var(--accent1), var(--accent2));
+      border: none;
+      color: #fff;
+      padding: 12px 20px;
+      font-weight:700;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(221,36,118,0.18);
+      transition: transform .18s ease, box-shadow .18s;
+    }
+    .btn-cta:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(221,36,118,0.22) }
+
+    /* footer */
+    footer { background: linear-gradient(90deg, #0d47a1, #1565c0); color: #fff; padding: 28px 12px; border-radius: 1rem; margin-top:32px; }
+
+    /* language toggles */
+    .lang-btn { min-width:58px; border-radius:10px; }
+
+    /* responsive tweaks */
+    @media (max-width: 768px) {
+      .hero { padding: 36px 12px; }
+      .carousel-item img { height: 220px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- subtle particle overlay (SVG) -->
+  <div class="particles">
+    <svg width="100%" height="100%" viewBox="0 0 800 600" preserveAspectRatio="none">
+      <defs>
+        <radialGradient id="g1" cx="20%" cy="20%" r="60%">
+          <stop offset="0%" stop-color="#ffffff" stop-opacity="0.35" />
+          <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+        </radialGradient>
+      </defs>
+      <circle cx="80" cy="140" r="120" fill="url(#g1)"></circle>
+      <circle cx="740" cy="480" r="140" fill="url(#g1)"></circle>
+    </svg>
+  </div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="#">
+        <img src="https://images.unsplash.com/photo-1584515933487-779824d29309?q=80&w=200&auto=format&fit=crop&s=placeholder" alt="logo" width="36" height="36" class="rounded-circle me-2">
+        <span>SymptoCare</span>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navContent">
+        <ul class="navbar-nav ms-3 me-auto">
+          <li class="nav-item"><a class="nav-link text-white" href="frontpage.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link text-white active" href="about_symptocare.html">Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="tests.html">Tests</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="https://www.apollohospitals.com/">External</a></li>
+        </ul>
+
+        <div class="d-flex align-items-center gap-2">
+          <!-- live clock -->
+          <div class="text-white me-2 small">
+            <span id="liveClock" aria-live="polite">--:--:--</span>
+          </div>
+
+          <!-- language switcher -->
+          <div class="btn-group" role="group" aria-label="Languages">
+            <button class="btn btn-sm btn-outline-light lang-btn" onclick="setLang('en')" id="lang-en">EN</button>
+            <button class="btn btn-sm btn-outline-light lang-btn" onclick="setLang('es')" id="lang-es">ES</button>
+            <button class="btn btn-sm btn-outline-light lang-btn" onclick="setLang('hi')" id="lang-hi">HI</button>
+            <button class="btn btn-sm btn-outline-light lang-btn" onclick="setLang('te')" id="lang-te">TE</button> 
+          </div>
+
+          <a class="btn btn-outline-light ms-3" href="frontpage.html">Logout</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="container">
+    <div class="hero mt-4">
+      <div class="row align-items-center">
+        <div class="col-lg-7 text-start text-white">
+          <h1 id="heroTitle">welcome to SymptoCare</h1>
+          <p class="lead" id="heroSub">Your smart symptom-checking companion — quick guidance, suggested tests, and home-care tips.</p>
+          <div class="mt-3">
+            <a href="tests.html" class="btn btn-cta me-2">Run Symptom Test</a>
+            <a href="#features" class="btn btn-outline-light">Explore Features</a>
+          </div>
+        </div>
+        <div class="col-lg-5 text-end d-none d-lg-block">
+          <img src="h1.jpeg" alt="health illustration" class="img-fluid floating rounded-3 shadow-lg" style="max-height:320px;">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main class="section container" id="features">
+    <div class="row g-4">
+      <!-- Carousel / Images -->
+      <div class="col-lg-7">
+        <div id="promoCarousel" class="carousel slide card-tilt carousel-fade" data-bs-ride="carousel">
+          <div class="carousel-inner p-3" style="background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.9)); border-radius: .85rem;">
+            <div class="carousel-item active">
+              <img src="lab.jpg" class="d-block w-100" alt="clinic">
+              <div class="carousel-caption d-none d-md-block text-start">
+                <h5 id="slide1Title">AI-Assisted Symptom Checker</h5>
+                <p id="slide1Text">Friendly, fast suggestions to help you take the next best step.</p>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="doc.jpg" class="d-block w-100" alt="doctor">
+              <div class="carousel-caption d-none d-md-block text-start">
+                <h5 id="slide2Title">Clinically Aligned Guidance</h5>
+                <p id="slide2Text">Recommendations reflect common clinical best-practices (not a substitute for doctor care).</p>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="tech.avif" class="d-block w-100" alt="technology">
+              <div class="carousel-caption d-none d-md-block text-start">
+                <h5 id="slide3Title">Secure & Private</h5>
+                <p id="slide3Text">User privacy-first design with optional exportable PDF visit summaries.</p>
+              </div>
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#promoCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#promoCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Info & Stats -->
+      <div class="col-lg-5">
+        <div class="card p-4 card-tilt" style="background: var(--card-bg);">
+          <h4 id="infoTitle">What is SymptoCare?</h4>
+          <p id="infoText">SymptoCare is a smart symptom-checker that helps users quickly interpret common symptoms, suggests likely causes, and lists recommended tests and home-care tips. It is meant as an informational tool — always consult a healthcare professional for diagnosis.</p>
+            </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Real-time / live info card -->
+        <div class="card mt-3 p-3 card-tilt" style="background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,255,255,0.98));">
+          <div class="d-flex align-items-center justify-content-between">
+            <div>
+              <h6 id="liveTitle">Live</h6>
+              <small id="liveDesc">Local time & system status</small>
+            </div>
+            <div class="text-end">
+              <div class="badge bg-success" id="sysStatus">Online</div>
+            </div>
+          </div>
+          <hr>
+          <div class="d-flex justify-content-between small text-muted">
+            <div>Time</div>
+            <div id="liveTime">--:--</div>
+          </div>
+          <div class="d-flex justify-content-between small text-muted mt-1">
+            <div>Server</div>
+            <div>symptocare.example.com</div>
+          </div>
+          <div class="small text-muted mt-2" id="liveNotes">Tip: Keep hydrated. If fever persists >48 hours consult a physician.</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Additional features -->
+  <section class="section container" id="more">
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card p-4 card-tilt">
+          <h5 id="feat1Title">Interactive Forms</h5>
+          <p id="feat1Text">Step-by-step symptom forms with tailored question flows for faster, clearer results.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card p-4 card-tilt">
+          <h5 id="feat2Title">Multi-Language Support</h5>
+          <p id="feat2Text">Switch between English, Spanish (Español) and Hindi (हिन्दी) instantly for wider accessibility.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card p-4 card-tilt">
+          <h5 id="feat3Title">Exportable Summaries</h5>
+          <p id="feat3Text">Download test summaries as PDF to share with your doctor (optional).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- multilingual examples -->
+  <section class="section container">
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <div class="card p-4 card-tilt" style="background: var(--card-bg);">
+          <h4 id="translateExampleTitle">Sample Diagnosis Card</h4>
+          <p id="translateExampleText">Migraine — Suggested tests: MRI, Neurological exam. Home remedies: cold compress, rest, and hydration.</p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card p-4 card-tilt">
+          <h5>Images</h5>
+          <p class="small text-muted">Representative images — replace with your hospital/clinic images for a personalized feel.</p>
+          <div class="d-flex gap-2">
+            <img src="https://images.unsplash.com/photo-1580281657523-0f9b6c327f8b?q=80&w=400&auto=format&fit=crop&s=placeholder" alt="sample1" class="img-fluid rounded" style="height:64px; width:64px; object-fit:cover;">
+            <img src="https://images.unsplash.com/photo-1584438781610-40f2310b6d91?q=80&w=400&auto=format&fit=crop&s=placeholder" alt="sample2" class="img-fluid rounded" style="height:64px; width:64px; object-fit:cover;">
+            <img src="https://images.unsplash.com/photo-1542367597-06b2824ab6c3?q=80&w=400&auto=format&fit=crop&s=placeholder" alt="sample3" class="img-fluid rounded" style="height:64px; width:64px; object-fit:cover;">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="container">
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <p class="mb-0">© 2025 SymptoCare. All rights reserved.</p>
+        <small class="text-white-50">Privacy-first • Non-diagnostic educational tool</small>
+      </div>
+      <div class="col-md-6 text-md-end mt-2 mt-md-0">
+        <a class="btn btn-sm btn-outline-light me-2" href="#">Terms</a>
+        <a class="btn btn-sm btn-outline-light" href="#">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Page Script: clock, counters, multilingual content, simulated real-time updates -->
+  <script>
+    // ---------- Live clock ----------
+    function updateClock(){
+      const el = document.getElementById('liveClock');
+      const el2 = document.getElementById('liveTime');
+      const now = new Date();
+      const opts = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
+      el.textContent = now.toLocaleTimeString([], opts);
+      el2.textContent = now.toLocaleTimeString([], { hour: '2-digit', minute:'2-digit' });
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // ---------- Animated counters (simulated "real-time" stats) ----------
+    const counters = {
+      users: { el: document.getElementById('counterUsers'), from: 2400, to: 2572 },
+      tests: { el: document.getElementById('counterTests'), from: 68, to: 123 }
+    };
+    function animateCounter(obj, duration=1500){
+      const start = obj.from;
+      const end = obj.to;
+      const el = obj.el;
+      const startTime = performance.now();
+      function step(now){
+        const t = Math.min(1, (now - startTime) / duration);
+        const val = Math.floor(start + (end - start) * t);
+        el.textContent = val.toLocaleString();
+        if(t < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+    // start counters after small delay (simulate live updates)
+    setTimeout(()=> {
+      animateCounter(counters.users, 1400);
+      animateCounter(counters.tests, 1800);
+    }, 800);
+
+    // ---------- Multilingual Content ----------
+    const translations = {
+      en: {
+        heroTitle: "Welcome to SymptoCare",
+        heroSub: "Your smart symptom-checking companion — quick guidance, suggested tests, and home-care tips.",
+        slide1Title: "AI-Assisted Symptom Checker",
+        slide1Text: "Friendly, fast suggestions to help you take the next best step.",
+        slide2Title: "Clinically Aligned Guidance",
+        slide2Text: "Recommendations reflect common clinical best-practices (not a substitute for doctor care).",
+        slide3Title: "Secure & Private",
+        slide3Text: "User privacy-first design with optional exportable PDF visit summaries.",
+        infoTitle: "What is SymptoCare?",
+        infoText: "SymptoCare is a smart symptom-checker that helps users quickly interpret common symptoms, suggests likely causes, and lists recommended tests and home-care tips. It is meant as an informational tool — always consult a healthcare professional for diagnosis.",
+        feat1Title: "Interactive Forms",
+        feat1Text: "Step-by-step symptom forms with tailored question flows for faster, clearer results.",
+        feat2Title: "Multi-Language Support",
+        feat2Text: "Switch between English, Spanish (Español) and Hindi (हिन्दी) instantly for wider accessibility.",
+        feat3Title: "Exportable Summaries",
+        feat3Text: "Download test summaries as PDF to share with your doctor (optional).",
+        translateExampleTitle: "Sample Diagnosis Card",
+        translateExampleText: "Migraine — Suggested tests: MRI, Neurological exam. Home remedies: cold compress, rest, and hydration.",
+        liveTitle: "Live",
+        liveDesc: "Local time & system status",
+        sysOnline: "Online"
+      },
+      es: {
+        heroTitle: "Bienvenido a SymptoCare",
+        heroSub: "Tu compañero inteligente para revisar síntomas — orientación rápida, pruebas sugeridas y consejos caseros.",
+        slide1Title: "Comprobador de Síntomas con IA",
+        slide1Text: "Sugerencias rápidas y amigables para ayudarte a tomar el siguiente paso.",
+        slide2Title: "Guía alineada clínicamente",
+        slide2Text: "Recomendaciones basadas en prácticas clínicas comunes (no sustituyen al médico).",
+        slide3Title: "Seguro y Privado",
+        slide3Text: "Diseño que prioriza la privacidad del usuario y resúmenes exportables en PDF.",
+        infoTitle: "¿Qué es SymptoCare?",
+        infoText: "SymptoCare es un comprobador inteligente de síntomas que ayuda a interpretar rápidamente síntomas comunes, sugiere causas probables y lista pruebas y consejos caseros. Es una herramienta informativa — consulta a un profesional para diagnóstico.",
+        feat1Title: "Formularios Interactivos",
+        feat1Text: "Formularios paso a paso con flujos de preguntas personalizados para resultados más rápidos y claros.",
+        feat2Title: "Soporte Multilenguaje",
+        feat2Text: "Cambia entre Inglés, Español y Hindi al instante para una mayor accesibilidad.",
+        feat3Title: "Resúmenes Exportables",
+        feat3Text: "Descarga resúmenes en PDF para compartir con tu médico (opcional).",
+        translateExampleTitle: "Ejemplo de Diagnóstico",
+        translateExampleText: "Migraña — Pruebas sugeridas: MRI, examen neurológico. Remedios: compresa fría, descanso y hidratación.",
+        liveTitle: "En Vivo",
+        liveDesc: "Hora local y estado del sistema",
+        sysOnline: "En línea"
+      },
+      hi: {
+        heroTitle: "SymptoCare में आपका स्वागत है",
+        heroSub: "आपका स्मार्ट लक्षण जाँच साथी — त्वरित मार्गदर्शन, सुझाए गए परीक्षण और घरेलू देखभाल सुझाव।",
+        slide1Title: "AI-समर्थित लक्षण जाँच",
+        slide1Text: "तेज़ और उपयोगकर्ता-अनुकूल सुझाव जो अगला कदम बताएं।",
+        slide2Title: "क्लिनिकल गाइडेंस",
+        slide2Text: "सिफारिशें सामान्य क्लिनिकल सर्वोत्तम प्रथाओं पर आधारित हैं (डॉक्टर का स्थान नहीं लेती)।",
+        slide3Title: "सुरक्षित और निजी",
+        slide3Text: "प्राइवेसी-प्रथम डिज़ाइन और वैकल्पिक PDF सारांश।",
+        infoTitle: "SymptoCare क्या है?",
+        infoText: "SymptoCare एक स्मार्ट लक्षण-चेकर है जो सामान्य लक्षणों का शीघ्र विश्लेषण करता है, संभावित कारण सुझाता है और सुझाए गए परीक्षण व घरेलू उपचार बताता है। यह एक सूचना-दायक उपकरण है — निदान हेतु डॉक्टर से मिलें।",
+        feat1Title: "इंटरएक्टिव फॉर्म",
+        feat1Text: "स्टेप-बाय-स्टेप प्रश्नों के साथ तेज और स्पष्ट परिणाम।",
+        feat2Title: "बहुभाषी समर्थन",
+        feat2Text: "अधिक पहुँच के लिए अंग्रेजी, स्पेनिश और हिंदी में स्विच करें।",
+        feat3Title: "एक्सपोर्टेबल सारांश",
+        feat3Text: "परीक्षण सारांश PDF में डाउनलोड कर डॉक्टर के साथ साझा करें (वैकल्पिक)।",
+        translateExampleTitle: "डेमो डायग्नोसिस कार्ड",
+        translateExampleText: "माइग्रेन — सुझाए गए परीक्षण: MRI, न्यूरोलॉजिकल परीक्षा। घरेलू उपचार: ठंडी पट्टी, आराम और हाइड्रेशन।",
+        liveTitle: "लाइव",
+        liveDesc: "स्थानीय समय और सिस्टम स्थिति",
+        sysOnline: "ऑनलाइन"
+      },
+      te: {
+    heroTitle: "SymptoCare కి స్వాగతం",
+    heroSub: "మీ స్మార్ట్ లక్షణాల తనిఖీ సహాయకుడు — త్వరిత మార్గదర్శనం, సూచించిన పరీక్షలు మరియు గృహ చికిత్స సూచనలు.",
+    slide1Title: "AI ఆధారిత లక్షణాల తనిఖీ",
+    slide1Text: "తదుపరి ఉత్తమ దశను సూచించే సులభమైన, వేగవంతమైన సూచనలు.",
+    slide2Title: "క్లినికల్ మార్గదర్శనం",
+    slide2Text: "సిఫార్సులు సాధారణ క్లినికల్ ఉత్తమ పద్ధతుల ఆధారంగా ఉంటాయి (డాక్టర్ స్థానంలో ఉపయోగించరాదు).",
+    slide3Title: "సురక్షితంగా మరియు వ్యక్తిగతంగా",
+    slide3Text: "వినియోగదారు గోప్యత ప్రథమ రూపకల్పన మరియు ఐచ్చిక PDF సారాంశాలు.",
+    infoTitle: "SymptoCare అంటే ఏమిటి?",
+    infoText: "SymptoCare ఒక స్మార్ట్ లక్షణాల తనిఖీ సాధనం, ఇది సాధారణ లక్షణాలను త్వరగా విశ్లేషించి, సాధ్యమైన కారణాలను సూచించి, పరీక్షలు మరియు గృహ చికిత్సల జాబితాను ఇస్తుంది. ఇది సమాచార సాధనం మాత్రమే — ఖచ్చితమైన నిర్ధారణ కోసం డాక్టర్‌ను సంప్రదించండి.",
+    feat1Title: "ఇంటరాక్టివ్ ఫారమ్స్",
+    feat1Text: "దశలవారీ ప్రశ్నలతో వేగవంతమైన, స్పష్టమైన ఫలితాలు.",
+    feat2Title: "బహుభాషా మద్దతు",
+    feat2Text: "ఇంగ్లీష్, స్పానిష్, హిందీ మరియు తెలుగు మధ్య తక్షణమే మారవచ్చు.",
+    feat3Title: "ఎగుమతి చేయగల సారాంశాలు",
+    feat3Text: "పరీక్ష సారాంశాలను PDFలో డౌన్‌లోడ్ చేసి మీ డాక్టర్‌తో పంచుకోండి (ఐచ్చికం).",
+    translateExampleTitle: "ఉదాహరణ నిర్ధారణ కార్డ్",
+    translateExampleText: "మైగ్రేన్ — సూచించిన పరీక్షలు: MRI, న్యూరోలాజికల్ పరీక్ష. గృహ చికిత్సలు: చల్లని కంప్రెస్, విశ్రాంతి మరియు హైడ్రేషన్.",
+    liveTitle: "ప్రత్యక్ష",
+    liveDesc: "స్థానిక సమయం & సిస్టమ్ స్థితి",
+    sysOnline: "ఆన్‌లైన్"
+  }
+    };
+
+    function setLang(code){
+      // update UI strings
+      const t = translations[code] || translations.en;
+      document.getElementById('heroTitle').textContent = t.heroTitle;
+      document.getElementById('heroSub').textContent = t.heroSub;
+      document.getElementById('slide1Title').textContent = t.slide1Title;
+      document.getElementById('slide1Text').textContent = t.slide1Text;
+      document.getElementById('slide2Title').textContent = t.slide2Title;
+      document.getElementById('slide2Text').textContent = t.slide2Text;
+      document.getElementById('slide3Title').textContent = t.slide3Title;
+      document.getElementById('slide3Text').textContent = t.slide3Text;
+      document.getElementById('infoTitle').textContent = t.infoTitle;
+      document.getElementById('infoText').textContent = t.infoText;
+      document.getElementById('feat1Title').textContent = t.feat1Title;
+      document.getElementById('feat1Text').textContent = t.feat1Text;
+      document.getElementById('feat2Title').textContent = t.feat2Title;
+      document.getElementById('feat2Text').textContent = t.feat2Text;
+      document.getElementById('feat3Title').textContent = t.feat3Title;
+      document.getElementById('feat3Text').textContent = t.feat3Text;
+      document.getElementById('translateExampleTitle').textContent = t.translateExampleTitle;
+      document.getElementById('translateExampleText').textContent = t.translateExampleText;
+      document.getElementById('liveTitle').textContent = t.liveTitle;
+      document.getElementById('liveDesc').textContent = t.liveDesc;
+      document.getElementById('sysStatus').textContent = t.sysOnline;
+
+      // active class on buttons
+      document.getElementById('lang-en').classList.remove('active');
+      document.getElementById('lang-es').classList.remove('active');
+      document.getElementById('lang-hi').classList.remove('active');
+      document.getElementById('lang-te').classList.remove('active');
+      if(code==='en') document.getElementById('lang-en').classList.add('active');
+      if(code==='es') document.getElementById('lang-es').classList.add('active');
+      if(code==='hi') document.getElementById('lang-hi').classList.add('active');
+      if(code==='te') document.getElementById('lang-te').classList.add('active');
+    }
+
+    // default language
+    setLang('en');
+
+    // ---------- Simulated real-time data refresh ----------
+    // NOTE: If you want actual real-time (weather/news), implement fetch() calls to your API and update nodes below.
+    function simulateRealtimeUpdates(){
+      const notes = [
+        "Tip: Keep hydrated. If fever persists >48 hours consult a physician.",
+        "Reminder: Keep a record of temperature readings for 2 days.",
+        "Health notice: If you experience severe breathlessness, seek emergency care.",
+      ];
+      // rotate liveNotes every 10s
+      const ln = document.getElementById('liveNotes');
+      let idx = 0;
+      setInterval(()=> {
+        ln.textContent = notes[idx % notes.length];
+        idx++;
+      }, 10000);
+    }
+    simulateRealtimeUpdates();
+
+    // ---------- small system health simulation ----------
+    function setSystemStatus(ok=true){
+      const el = document.getElementById('sysStatus');
+      if(ok){
+        el.className = 'badge bg-success';
+        el.textContent = translations.en.sysOnline;
+      } else {
+        el.className = 'badge bg-danger';
+        el.textContent = 'Offline';
+      }
+    }
+    // set online by default
+    setSystemStatus(true);
+
+    // ---------- Accessibility: focus outlines for keyboard users ----------
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Tab') document.body.classList.add('show-focus');
+    });
+
+    // ---------- Placeholder: If you want to pull live weather/news uncomment & implement server-side proxies ----------
+    /*
+    // Example: fetch weather (requires API key & CORS)
+    fetch('/api/weather') // your server-side endpoint
+      .then(r => r.json())
+      .then(data => {
+        // update UI nodes
+      })
+      .catch(err => console.error(err));
+    */
+
+  </script>
+</body>
+</html>

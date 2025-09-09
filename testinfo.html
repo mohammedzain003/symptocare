@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Global Medical Tests & Technologies</title>
+  
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(120deg, #0f2027, #203a43, #2c5364);
+      color: #fff;
+    }
+    .navbar {
+      background: linear-gradient(90deg, #1e3c72, #2a5298);
+    }
+    .table thead {
+      background: #1e88e5;
+      color: #fff;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.08);
+      border: none;
+      border-radius: 15px;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+    .search-box {
+      border-radius: 25px;
+      border: none;
+      padding: 10px 20px;
+      width: 100%;
+    }
+    .highlight {
+      color: #4dd0e1;
+      font-weight: bold;
+    }
+    .filters label {
+      display: block;
+      margin-bottom: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="#">
+        <img src="https://images.unsplash.com/photo-1584515933487-779824d29309?q=80&w=200&auto=format&fit=crop" alt="logo" width="36" height="36" class="rounded-circle me-2">
+        <span>SymptoCare</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navContent">
+        <ul class="navbar-nav ms-3 me-auto">
+          <li class="nav-item"><a class="nav-link active text-white" href="frontpage.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="https://www.apollohospitals.com/">External</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- Hero Section -->
+  <section class="py-5 text-center">
+    <div class="container">
+      <h1 class="fw-bold">Real-Time <span class="highlight">Medical Tests & Technologies</span></h1>
+      <p class="lead text-light">Explore diagnostic tests, the technologies behind them, and common prescriptions used worldwide.</p>
+      <input type="text" id="searchInput" class="search-box mt-3" placeholder="Search for a test, technology, or prescription...">
+    </div>
+  </section>
+
+  <!-- Filters -->
+  <section class="pb-4">
+    <div class="container card p-3 filters">
+      <h5 class="text-info">Filter by Disease</h5>
+      <div class="row">
+        <div class="col-md-3">
+          <label><input type="checkbox" class="disease-filter" value="Anemia"> Anemia</label>
+          <label><input type="checkbox" class="disease-filter" value="Brain Tumor"> Brain Tumor</label>
+          <label><input type="checkbox" class="disease-filter" value="Heart Disease"> Heart Disease</label>
+        </div>
+        <div class="col-md-3">
+          <label><input type="checkbox" class="disease-filter" value="COVID-19"> COVID-19</label>
+          <label><input type="checkbox" class="disease-filter" value="Pregnancy"> Pregnancy</label>
+          <label><input type="checkbox" class="disease-filter" value="Liver Disease"> Liver Disease</label>
+        </div>
+        <div class="col-md-3">
+          <label><input type="checkbox" class="disease-filter" value="Thyroid Disorder"> Thyroid Disorder</label>
+          <label><input type="checkbox" class="disease-filter" value="Fracture"> Fracture</label>
+          <label><input type="checkbox" class="disease-filter" value="Diabetes"> Diabetes</label>
+        </div>
+        <div class="col-md-3">
+          <label><input type="checkbox" class="disease-filter" value="Kidney Disease"> Kidney Disease</label>
+          <label><input type="checkbox" class="disease-filter" value="Pneumonia"> Pneumonia</label>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Table Section -->
+  <section class="pb-5">
+    <div class="container">
+      <div class="card p-3">
+        <div class="table-responsive">
+          <table class="table table-dark table-hover align-middle" id="testsTable">
+            <thead>
+              <tr>
+                <th>Test Name</th>
+                <th>Technology</th>
+                <th>Symptoms/Disease</th>
+                <th>Common Prescriptions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Complete Blood Count (CBC)</td>
+                <td>Automated Hematology Analyzers</td>
+                <td>Anemia, Fatigue</td>
+                <td>Iron Supplements, Antibiotics</td>
+              </tr>
+              <tr>
+                <td>Magnetic Resonance Imaging (MRI)</td>
+                <td>Magnetic Field & Radio Waves Imaging</td>
+                <td>Brain Tumor, Spinal Injuries</td>
+                <td>Pain Relievers, Surgery Prep</td>
+              </tr>
+              <tr>
+                <td>Electrocardiogram (ECG/EKG)</td>
+                <td>Electrical Signal Monitoring</td>
+                <td>Heart Disease, Chest Pain</td>
+                <td>Beta Blockers, Blood Thinners</td>
+              </tr>
+              <tr>
+                <td>Polymerase Chain Reaction (PCR)</td>
+                <td>Genetic Material Amplification</td>
+                <td>COVID-19, Viral Infections</td>
+                <td>Antivirals, Rest & Hydration</td>
+              </tr>
+              <tr>
+                <td>Ultrasound</td>
+                <td>High-Frequency Sound Waves Imaging</td>
+                <td>Pregnancy, Organ Health</td>
+                <td>Hormonal Support, Pain Relief</td>
+              </tr>
+              <tr>
+                <td>CT Scan</td>
+                <td>X-ray Computed Tomography</td>
+                <td>Fracture, Internal Bleeding</td>
+                <td>Pain Relievers, Surgery</td>
+              </tr>
+              <tr>
+                <td>Liver Function Test (LFT)</td>
+                <td>Biochemical Assays</td>
+                <td>Liver Disease, Jaundice</td>
+                <td>Hepatoprotective Drugs</td>
+              </tr>
+              <tr>
+                <td>Thyroid Function Test</td>
+                <td>Immunoassay Technology</td>
+                <td>Thyroid Disorder</td>
+                <td>Levothyroxine, Antithyroid Drugs</td>
+              </tr>
+              <tr>
+                <td>Fasting Blood Sugar</td>
+                <td>Glucose Oxidase Method</td>
+                <td>Diabetes</td>
+                <td>Insulin, Metformin</td>
+              </tr>
+              <tr>
+                <td>Renal Function Test (RFT)</td>
+                <td>Biochemical Analysis</td>
+                <td>Kidney Disease</td>
+                <td>Diuretics, Dialysis Prep</td>
+              </tr>
+              <tr>
+                <td>Chest X-ray</td>
+                <td>Radiography</td>
+                <td>Pneumonia, Lung Infection</td>
+                <td>Antibiotics, Oxygen Therapy</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center py-4 mt-4" style="background:rgba(0,0,0,0.2)">
+    <p class="mb-0">&copy; 2025 Global Medical Insights | Powered by Healthcare Data</p>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Search & Filter Function -->
+  <script>
+    const searchInput = document.getElementById("searchInput");
+    const checkboxes = document.querySelectorAll(".disease-filter");
+    const rows = document.querySelectorAll("#testsTable tbody tr");
+
+    function filterTable() {
+      const searchVal = searchInput.value.toLowerCase();
+      const checkedDiseases = Array.from(checkboxes)
+        .filter(cb => cb.checked)
+        .map(cb => cb.value.toLowerCase());
+
+      rows.forEach(row => {
+        const text = row.textContent.toLowerCase();
+        const diseaseMatch = checkedDiseases.length === 0 || checkedDiseases.some(d => text.includes(d));
+        const searchMatch = text.includes(searchVal);
+        row.style.display = (diseaseMatch && searchMatch) ? "" : "none";
+      });
+    }
+
+    searchInput.addEventListener("keyup", filterTable);
+    checkboxes.forEach(cb => cb.addEventListener("change", filterTable));
+  </script>
+
+</body>
+</html>

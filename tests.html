@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SymptoCare - Symptom Checker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      background-attachment: fixed;
+      color: #f0f0f0;
+    }
+    .navbar {
+      background: linear-gradient(to right, #1565c0, #00bcd4);
+    }
+    .category {
+      margin-bottom: 30px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+    h1, h4 {
+      color: #90caf9;
+    }
+    label {
+      color: #f0f0f0;
+    }
+    .btn-success {
+      background: linear-gradient(to right, #43cea2, #185a9d);
+      border: none;
+      font-weight: bold;
+    }
+    .btn-success:hover {
+      background: linear-gradient(to right, #185a9d, #43cea2);
+    }
+    /* Refresh button styles */
+    .btn-refresh {
+      background: linear-gradient(45deg, #ff512f, #dd2476);
+      border: none;
+      font-weight: bold;
+      color: white;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-refresh:hover {
+      background: linear-gradient(45deg, #dd2476, #ff512f);
+      transform: scale(1.05) rotate(3deg);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+    }
+    /* Pulse animation */
+    .pulse {
+      animation: pulseAnim 1.5s infinite;
+    }
+    @keyframes pulseAnim {
+      0% { transform: scale(1); box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+      50% { transform: scale(1.05); box-shadow: 0 8px 20px rgba(255, 81, 47, 0.6); }
+      100% { transform: scale(1); box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+    }
+    .result-box {
+      display: none;
+      margin-top: 30px;
+      animation: zoomIn 0.8s ease;
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+    }
+    @keyframes zoomIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    footer {
+      background-color: #0d47a1;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 50px;
+    }
+    @media (max-width: 768px) {
+      .category { padding: 15px; }
+      h1 { font-size: 1.8rem; }
+      .btn { font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+  <div class="container-fluid">
+    <a class="navbar-brand fw-bold" href="#">SymptoCare</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarContent">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item"><a class="nav-link" href="frontpage.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link active" href="#">Symptom Test</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Main Content -->
+<div class="container py-5">
+  <h1 class="text-center mb-4">Smart Symptom Checker</h1>
+  <form id="symptomForm">
+
+    <!-- Headache -->
+    <div class="category">
+      <h4>Headache</h4>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="throbbing" id="throbbing">
+        <label class="form-check-label" for="throbbing">Throbbing pain</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="oneside" id="oneside">
+        <label class="form-check-label" for="oneside">One-sided pain</label>
+      </div>
+    </div>
+
+    <!-- Fever -->
+    <div class="category">
+      <h4>Fever</h4>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="highfever" id="highfever">
+        <label class="form-check-label" for="highfever">High Fever</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="chills" id="chills">
+        <label class="form-check-label" for="chills">Fever with Chills</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="lowgrade" id="lowgrade">
+        <label class="form-check-label" for="lowgrade">Low-grade Fever</label>
+      </div>
+    </div>
+
+    <!-- Stomach Issues -->
+    <div class="category">
+      <h4>Stomach Issues</h4>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="burning" id="burning">
+        <label class="form-check-label" for="burning">Burning sensation</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="diarrhea" id="diarrhea">
+        <label class="form-check-label" for="diarrhea">Loose motion / Diarrhea</label>
+      </div>
+    </div>
+
+    <!-- Body Pain -->
+    <div class="category">
+      <h4>Body Pain</h4>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="jointpain" id="jointpain">
+        <label class="form-check-label" for="jointpain">Joint Pain</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="muscleache" id="muscleache">
+        <label class="form-check-label" for="muscleache">Muscle Ache</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="weakness" id="weakness">
+        <label class="form-check-label" for="weakness">General Weakness</label>
+      </div>
+    </div>
+
+    <div class="text-center">
+      <button type="button" class="btn btn-success btn-lg mt-3" onclick="checkDiagnosis()">Check Diagnosis</button>
+      <button type="button" id="refreshBtn" class="btn btn-refresh btn-lg mt-3 ms-2" onclick="refreshForm()">🔄 Refresh</button>
+    </div>
+  </form>
+
+  <!-- Diagnosis Result -->
+  <div class="result-box card mt-4" id="resultBox">
+    <div class="card-body">
+      <h5 class="card-title text-warning" id="diseaseName"></h5>
+      <p><strong>Prescription:</strong> <span id="prescription"></span></p>
+      <p><strong>Home Remedies:</strong> <span id="remedies"></span></p>
+    </div>
+  </div>
+
+  <!-- Recommended Tests -->
+  <div class="result-box card mt-4" id="testBox">
+    <div class="card-body">
+      <h5 class="card-title text-info">Recommended Medical Tests</h5>
+      <ul id="testList" class="mb-0"></ul>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer>
+  <p>© 2025 SymptoCare. All rights reserved.</p>
+</footer>
+
+<!-- Sound -->
+<audio id="successSound" src="https://www.soundjay.com/buttons/sounds/button-3.mp3" preload="auto"></audio>
+
+<script>
+  function checkDiagnosis() {
+    const selected = [];
+    document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+      if (cb.checked) selected.push(cb.value);
+    });
+
+    const diseaseData = [
+      { name: "Migraine", symptoms: ["throbbing", "oneside"], prescription: "Ibuprofen, Paracetamol, Rest in dark room", remedies: "Cold compress, Ginger tea, Avoid stress" },
+      { name: "Viral Fever", symptoms: ["lowgrade", "chills"], prescription: "Paracetamol, Fluids, Rest", remedies: "Tulsi tea, sponge bath, hydration" },
+      { name: "Food Poisoning", symptoms: ["burning", "diarrhea"], prescription: "ORS, Antibiotics if needed", remedies: "Ginger water, Banana, Rest" },
+      { name: "Dengue or Viral Body Ache", symptoms: ["jointpain", "muscleache", "weakness"], prescription: "Painkillers, Fluids, Electrolytes", remedies: "Papaya leaf juice, Hydration, Rest" },
+      { name: "Possible Dengue or Flu", symptoms: ["highfever", "jointpain"], prescription: "Consult doctor, Avoid self-medication", remedies: "ORS, Rest, Healthy food" }
+    ];
+
+    const testData = {
+      "Migraine": ["MRI", "CT Scan", "Neurological Exam"],
+      "Viral Fever": ["CBC", "Dengue Test", "Typhoid Test"],
+      "Food Poisoning": ["Stool Culture", "Urine Test", "Blood Test"],
+      "Dengue or Viral Body Ache": ["Dengue NS1", "Platelet Count", "Electrolyte Panel"],
+      "Possible Dengue or Flu": ["Dengue Rapid", "Flu Panel", "Complete Blood Count"]
+    };
+
+    let bestMatch = null;
+    let highestScore = 0;
+    diseaseData.forEach(disease => {
+      let score = 0;
+      disease.symptoms.forEach(symptom => {
+        if (selected.includes(symptom)) score++;
+      });
+      if (score > highestScore) {
+        highestScore = score;
+        bestMatch = disease;
+      }
+    });
+
+    const diseaseName = document.getElementById("diseaseName");
+    const prescription = document.getElementById("prescription");
+    const remedies = document.getElementById("remedies");
+    const resultBox = document.getElementById("resultBox");
+    const testBox = document.getElementById("testBox");
+    const testList = document.getElementById("testList");
+    const sound = document.getElementById("successSound");
+    const refreshBtn = document.getElementById("refreshBtn");
+
+    if (bestMatch && highestScore > 0) {
+      diseaseName.textContent = bestMatch.name;
+      prescription.textContent = bestMatch.prescription;
+      remedies.textContent = bestMatch.remedies;
+
+      testList.innerHTML = "";
+      (testData[bestMatch.name] || []).forEach(test => {
+        const li = document.createElement("li");
+        li.textContent = test;
+        testList.appendChild(li);
+      });
+      testBox.style.display = "block";
+    } else {
+      diseaseName.textContent = "No suitable match found";
+      prescription.textContent = "Please consult a physician";
+      remedies.textContent = "Maintain hygiene, rest, and hydration";
+      testBox.style.display = "none";
+    }
+
+    sound.play();
+    resultBox.style.display = "block";
+    resultBox.scrollIntoView({ behavior: "smooth" });
+
+    refreshBtn.classList.add("pulse");
+  }
+
+  function refreshForm() {
+    document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+    document.getElementById("resultBox").style.display = "none";
+    document.getElementById("testBox").style.display = "none";
+    document.getElementById("refreshBtn").classList.remove("pulse");
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
